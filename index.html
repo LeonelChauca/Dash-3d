@@ -1,37 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <title>Juego</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Juego</title>
 </head>
 <body>
-    <div>
-        <div class=" bg-gray-900 text-center h-[8vh] flex items-center justify-center">
-            <h2 class=" p-2 text-2xl font-bold text-neutral-300">PROYECTO</h2>
+  <div class="bg-gray-900 text-center h-[8vh] flex items-center justify-center">
+    <h2 class="p-2 text-2xl font-bold text-neutral-300">PROYECTO</h2>
+  </div>
+  <div class="flex">
+    <div class="flex justify-between flex-col bg-gray-900 w-[30%] h-[92vh] py-2">
+      <div>
+        <div onclick="cambiarFiguraEnIframe('Modelos/MISMARTTV.obj')" class="w-full text-center hover:bg-red-800 py-[10px] cursor-pointer">
+          <p class="text-white font-bold">Television</p>
         </div>
-        <div class=" flex">
-            <div class=" bg-gray-900 w-[300px] h-[92vh] py-2">
-                <div class=" w-full text-center hover:bg-red-800 py-[10px] cursor-pointer">
-                    <p class=" text-white font-bold">Figura - 1</p>
-                </div>
-                <div class=" w-full text-center hover:bg-red-800 py-[10px] cursor-pointer">
-                    <p class=" text-white font-bold">Figura - 2</p>
-                </div>
-                <div class=" w-full text-center hover:bg-red-800 py-[10px] cursor-pointer">
-                    <p class=" text-white font-bold">Figura - 3</p>
-                </div>
-                <div class=" w-full text-center hover:bg-red-800 py-[10px] cursor-pointer">
-                    <p class=" text-white font-bold">Figura - 4</p>
-                </div>
-    
-            </div>
-            <div class=" w-[80%]">
-                <iframe src="LeeObjColorV1.html" frameborder="0" width="1150" class=" p-0" height="800"></iframe>
-            </div>
+        <div onclick="cambiarFiguraEnIframe('Modelos/Lowpoly_Notebook_2.obj')" class="w-full text-center hover:bg-red-800 py-[10px] cursor-pointer">
+          <p class="text-white font-bold">Laptop</p>
         </div>
-        
+        <div onclick="cambiarFiguraEnIframe('Modelos/12140_Skull_v3_L2.obj')" class="w-full text-center hover:bg-red-800 py-[10px] cursor-pointer">
+          <p class="text-white font-bold">Craneo</p>
+        </div>
+        <div onclick="cambiarFiguraEnIframe('Modelos/coffee_cup_obj.obj')" class="w-full text-center hover:bg-red-800 py-[10px] cursor-pointer">
+          <p class="text-white font-bold">Vaso</p>
+        </div>
+      </div>
+      <div>
+        <!-- Botón para cambiar el color de fondo -->
+        <div onclick="cambiarColorFondoEnIframe()" class="w-full text-center hover:bg-red-800 py-[10px] cursor-pointer">
+          <p class="text-white font-bold">Cambiar Color de fondo</p>
+        </div>
+        <!-- Botón para cambiar a modo GL_TRIANGLES -->
+        <div onclick="cambiarModoRenderizadoEnIframe('GL_TRIANGLES')" class="w-full text-center hover:bg-red-800 py-[10px] cursor-pointer">
+          <p class="text-white font-bold">GL TRIANGLES</p>
+        </div>
+        <!-- Botón para cambiar a modo GL_LINES -->
+        <div onclick="cambiarModoRenderizadoEnIframe('GL_LINES')" class="w-full text-center hover:bg-red-800 py-[10px] cursor-pointer">
+          <p class="text-white font-bold">GL LINES</p>
+        </div>
+      </div>
     </div>
+    <div class="w-[90%]">
+      <iframe src="LeeObjColorV1.html" style="width: 100%;" frameborder="0" width="1350" class="p-0" height="800"></iframe>
+    </div>
+  </div>
+
+  <script>
+    function cambiarFiguraEnIframe(urlObj) {
+      const iframe = document.querySelector("iframe");
+      if (iframe.contentWindow && typeof iframe.contentWindow.cambiarFigura === "function") {
+        iframe.contentWindow.cambiarFigura(urlObj);
+      } else {
+        console.error("La función cambiarFigura no está disponible en el iframe.");
+      }
+    }
+
+    function cambiarColorFondoEnIframe() {
+      const iframe = document.querySelector("iframe");
+      if (iframe.contentWindow && typeof iframe.contentWindow.cambiarColorFondo === "function") {
+        iframe.contentWindow.cambiarColorFondo();
+      } else {
+        console.error("La función cambiarColorFondo no está disponible en el iframe.");
+      }
+    }
+
+    function cambiarModoRenderizadoEnIframe(modo) {
+      const iframe = document.querySelector("iframe");
+      if (iframe.contentWindow && typeof iframe.contentWindow.alternarModoRenderizado === "function") {
+        iframe.contentWindow.alternarModoRenderizado(modo);
+      } else {
+        console.error("La función alternarModoRenderizado no está disponible en el iframe.");
+      }
+    }
+  </script>
 </body>
 </html>
